@@ -4,6 +4,9 @@ import json
 def find(data, key, value):
     return [x for x in data if str(x.get(key, None)) == str(value)]
 
+def findIndex(data, key, value):
+    return next((i for i, x in enumerate(data) if str(x.get(key, None)) == str(value)), -1)
+
 def getData():
     data = [];
 
