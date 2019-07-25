@@ -40,7 +40,7 @@ class MockAPI:
                     'total_row': total
                     }
     
-    def on_post(self, req, res):
+    def on_post(self, req, res, *args, **kws):
         try:
             db = getData()
             data = req.media
