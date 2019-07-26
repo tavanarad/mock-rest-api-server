@@ -1,5 +1,6 @@
 import falcon
 import uuid
+from falcon_cors import CORS
 from math import ceil
 
 from .utils import (
@@ -40,7 +41,7 @@ class MockAPI:
                     'total_row': total
                     }
     
-    def on_post(self, req, res, *args, **kws):
+    def on_post(self, req, res, *arg, **kws):
         try:
             db = getData()
             data = req.media
@@ -90,7 +91,8 @@ class MockAPI:
 
 
 API_PREFIX = '/api/v1'
-api = falcon.API()
+cors = CORS(allow_all_origins=True)
+api = falcon.API(middleware=[cors.middleware])
 api.add_route(API_PREFIX + '/user', MockAPI());
 api.add_route(API_PREFIX + '/user/{id}', MockAPI());
 
