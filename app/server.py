@@ -77,12 +77,13 @@ class MockAPI:
     def on_delete(self, req, res, id = None):
         try:
             db = getData()
-            index = findIndex(id)
+            index = findIndex(db, 'id', id)
             
             if index < 0:
                 raise Exception()
 
-            db.remove(index)
+            db.remove(db[index])
+            writeData(db)
             res.media = { 'data': id }
         except Exception as ex:
             print(ex)
